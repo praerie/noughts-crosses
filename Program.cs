@@ -10,14 +10,19 @@ class Program
         {
             for (int j=0; j<3; j++)
             {
-                Console.Write(" " + grid[i * 3 + j] + " ");
+                // print grid element 
+                Console.Write(grid[i * 3 + j]);
 
+                // add vertical separator if not last column
                 if (j<2)
                 {
-                    Console.Write("|");
+                    Console.Write(" | ");
                 }
             }
+            // move to next line after each row
             Console.WriteLine();
+
+            // add horizontal separator if not last row
             if (i<2)
             {
                 Console.WriteLine("-----------");
