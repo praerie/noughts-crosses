@@ -11,12 +11,24 @@ class Program
         {
             for (int j = 0; j < 3; j++)
             {
+                int index = i * 3 + j;
+
+                // set default console color
+                Console.ForegroundColor = ConsoleColor.White;
+
+                // print X as blue and O as green
+                if (grid[index] == "X")
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else if (grid[index] == "O")
+                    Console.ForegroundColor = ConsoleColor.Green;
+
                 // print grid element 
-                Console.Write(" " + grid[i * 3 + j] + " ");
+                Console.Write(" " + grid[index] + " ");
 
                 // add vertical separator if not last column
                 if (j < 2)
                 {
+                    Console.ForegroundColor = ConsoleColor.White; // reset color to default
                     Console.Write("|");
                 }
             }
@@ -41,6 +53,8 @@ class Program
         {
             PrintGrid(grid);
 
+            Console.ForegroundColor = ConsoleColor.White; // reset color to default
+            
             if (firstPlayerTurn) 
                 Console.WriteLine("First player's turn");
             else
@@ -53,7 +67,9 @@ class Program
                 int gridIndex = Convert.ToInt32(move) - 1;
                 
                 if (firstPlayerTurn)
+                {
                     grid[gridIndex] = "X";
+                }   
                 else
                     grid[gridIndex] = "O";
 
@@ -80,7 +96,7 @@ class Program
             bool col1 = grid[0] == grid[3] && grid[3] == grid[6]; 
             bool col2 = grid[1] == grid[4] && grid[4] == grid[7];
             bool col3 = grid[2] == grid[5] && grid[5] == grid[8];
-            // diagonally 
+            // diagonals
             bool diagDown = grid[0] == grid[4] && grid[4] == grid[8]; 
             bool diagUp = grid[6] == grid[4] && grid[4] == grid[2];
 
