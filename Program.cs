@@ -26,22 +26,39 @@ class Program
 
                 string move = Console.ReadLine();
 
-                if (grid.Contains(move) && move != "X" && move != "O")
+                if (int.TryParse(move, out int moveInt) && moveInt >= 1 && moveInt <= 9)
                 {
-                    int gridIndex = Convert.ToInt32(move) - 1;
+                    move = moveInt.ToString();
+                    int gridIndex = moveInt - 1;
                     
-                    if (firstPlayerTurn)
+                    if (grid.Contains(move) && grid[gridIndex] != "X" && grid[gridIndex] != "O")
                     {
-                        grid[gridIndex] = "X";
-                    }   
+                        if (firstPlayerTurn)
+                        {
+                            grid[gridIndex] = "X";
+                        }
+                        else
+                        {
+                            grid[gridIndex] = "O";
+                        }
+
+                        turnCount++;
+                    }
                     else
-                        grid[gridIndex] = "O";
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("[!] Invalid move! Please choose an empty cell.");
+                        continue;
+                    }
 
-                    turnCount++;
+                    // toggle turn if the move is valid
+                    firstPlayerTurn = !firstPlayerTurn;
                 }
-
-                // toggle turn btwn first and second players
-                firstPlayerTurn = !firstPlayerTurn;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[!] Invalid input! Please enter a number between 1 and 9.");
+                }    
             }
 
             if(HasWinner()) 
