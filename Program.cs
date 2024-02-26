@@ -35,8 +35,9 @@ class Program
     {
         grid = new string[9] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         bool firstPlayerTurn = true;
+        int turnCount = 0;
 
-        while (!HasWinner()) 
+        while (!HasWinner() && turnCount != 9) 
         {
             PrintGrid(grid);
 
@@ -55,11 +56,18 @@ class Program
                     grid[gridIndex] = "X";
                 else
                     grid[gridIndex] = "O";
+
+                turnCount++;
             }
 
             // toggle turn btwn first and second players
             firstPlayerTurn = !firstPlayerTurn;
         }
+
+        if(HasWinner()) 
+            Console.WriteLine("We have a winner!");
+        else
+            Console.WriteLine("Tie!");
 
         bool HasWinner()
         {
